@@ -130,6 +130,24 @@ function createGame() {
 
 }
 
+function deleteGame(ele){
+    let nombre = ele.getAttribute('data-name');
+    console.log("ola: " + nombre);
+    let url = APIURL+'/games/'+nombre;
+
+    console.log(url);
+    $('.btn-danger').off();
+    $(".btn-danger").on('click', function(event){
+        sendHTTPRequest(url, {}, HTTTPMethods.delete, (datos)=>{
+            console.log("datos: "+datos.data);
+            getGames();
+            alert('usuario eliminado');
+        }, (error)=>{
+            alert(error);
+        })
+    });
+}
+
 /*
 function getGame(){
     let urlParams = new URLSearchParams(window.location.search);
