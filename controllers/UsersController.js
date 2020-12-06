@@ -6,12 +6,6 @@ const cloudant = new CloudantSDK(CLOUDANT_CREDS.url);
 const USERS_CLOUDANT_DB = cloudant.db.use('users');
 let CURRENT_ID = 10000;
 
-
-/*let uids = USERS_DB.map((obj)=>{return obj.uid});
-CURRENT_ID = Math.max(...uids)+1;
-console.log(`Current id: ${CURRENT_ID}`);*/
-// console.table(USERS_DB);
-
 class UsersController {
     generateId(){
         let id = CURRENT_ID;
@@ -153,7 +147,7 @@ class UsersController {
             }
         }
         let user = await USERS_CLOUDANT_DB.find(q);
-        console.log("user: " + user);
+        console.log("user dentro de get: " + JSON.stringify(user));
         return user.docs[0];
     }
     async getUserByEmail(email,cbOk){

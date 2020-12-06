@@ -5,7 +5,7 @@ const HTTTPMethods = {
     "delete": "DELETE"
 }
 const APIURL = window.location.protocol + '//' + window.location.host + '/api';
-let TOKEN = getTokenValue('token');
+let TOKEN = getTokenValue('x-auth-user');
 let PAGES = {
     current: 1,
     currentIndex: 0,

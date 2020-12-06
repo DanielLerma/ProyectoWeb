@@ -73,7 +73,7 @@ class GameController {
                 cbOk();
             }else{
                 GAMES_DB_CLOUDANT.insert(updatee).then((addedEntry)=>{
-                    console.log(addedEntry);
+                    //console.log(addedEntry);
                     if(addedEntry.ok){
                         user.rev= addedEntry.rev;
                         user.uid = addedEntry.id;

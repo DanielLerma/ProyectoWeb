@@ -1,33 +1,6 @@
 //const APIURL = window.location.protocol + '//' + window.location.host + '/api';
 let pagina=0;
 let NAME_FILTER='';
-const statToHTMLSingleGame =(stat, nombre)=>{
-    let won = stat.win == true ? "Ganó" : "Perdió";    
-    if(nombre === stat.game){
-        console.log("entró");
-        return `
-        <div class="row" >
-            <div class="col-sm border border-dark">
-                ${stat.user}
-            </div>
-            <div class="col-sm border border-dark">
-                ${stat.game}
-            </div>
-            <div class="col-sm border border-dark">
-                ${stat.kills}
-            </div>
-            <div class="col-sm border border-dark">
-                ${stat.email}
-            </div>
-            <div class="col-sm border border-dark">
-                ${won}
-            </div>
-            
-        </div>
-        `
-    }
-    return;
-}
 
 const statToHTML=(stat)=>{    
     let won = stat.win == true ? "Ganó" : "Perdió";
@@ -87,26 +60,6 @@ function bajar(){
     getStats(game);
 pagina-=3;
 }
-/*
-function searchStat(list){
-    let btn = document.getElementById("searchBtn");
-    console.log(pagina);
-    let game = document.getElementById("gameSearched").value;
-    console.log("game: " + game);
-    console.log("list: " + JSON.stringify(list));
-    let newList = [];
-   if (pagina<=0) document.getElementById("pre").disabled = true;
-
-    for(let i=pagina; i < pagina+3;i++){
-        if(i<list.length){
-        if(list[i].game.includes(game.toUpperCase())){
-            newList.push(list[i]);
-              }
-        }    
-    }
-    statListToHTML(newList, "listaStat");
-}
-*/
 
 function searchStat(list){
     let btn = document.getElementById("searchBtn");
@@ -207,26 +160,6 @@ function setStat(){
     
 }
 
-/*
-function getSingleGameStats(gameID){
-    console.log("name: " + gameID);
-    console.log("API: " + APIURL);
-    let url = APIURL + `/stats/` + gameID;
-    console.log("url: " + url);
-    sendHTTPRequest(url, {}, HTTTPMethods.get, (datos)=>{
-        //document.getElementById("lista").innerHTML = userListToHTML(datos, "lista");
-        console.log("datos dentro: " + JSON.stringify(datos.data));
-        //statToHTMLSingleGame(JSON.parse(datos.data), "listaStat", gameID);
-        //let statList = datos.data;
-        window.location.href = ("stats.html");
-        statToHTMLSingleGame(JSON.parse(datos.data), "listaStat", gameID);
-        //console.log("statlist: " + JSON.stringify(statList));
-        //window.location.href = ("stats.html");
-    },(err)=>{
-        alert(err);
-    })
-}*/
-
 function getStats(nombre) {
 
     console.log("name: " + nombre);
@@ -292,9 +225,5 @@ document.addEventListener('DOMContentLoaded',()=>{
             }
         });
     });
-    /*let btn = document.getElementById("regStat");
-    btn.addEventListener("click", function() {
-        setStat();
-    })*/
 
 });

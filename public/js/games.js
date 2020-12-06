@@ -1,54 +1,3 @@
-//import statFile from "/js/stats.js";
-
-/*
-const statToHTML=(stat)=>{
-    let won = stat.win == true ? "Ganó" : "Perdió";
-    return `
-    <div class="row" >
-        <div class="col-sm border border-dark">
-            ${stat.user}
-        </div>
-        <div class="col-sm border border-dark">
-            ${stat.game}
-        </div>
-        <div class="col-sm border border-dark">
-            ${stat.kills}
-        </div>
-        <div class="col-sm border border-dark">
-            ${stat.email}
-        </div>
-        <div class="col-sm border border-dark">
-            ${won}
-        </div>
-        
-    </div>
-    `
-}
-
-const statListToHTML=(list, id)=>{
-    console.log("id: " + id);
-    console.log("list2: " + list);
-    if(id && list && document.getElementById(id)){
-        document.getElementById(id).innerHTML =  list.map(statToHTML).join('');
-    }
-}
-
-function getSingleGameStats(){
-    /*let bt = document.getElementById("game");
-    bt.addEventListener("click", () => {
-        let name = $("game").text();
-        console.log("name: " + name);
-    });
-    $("game").click(() => {
-        let name = $("gameName").text();
-        console.log("name: " + name);
-    });
-    let name = document.getElementById("gameName").innerHTML;
-    console.log("name: " + name);
-}
-
-*/
-
 const gameToHTML = (user) => {
     return `
     <div class="row">
@@ -61,14 +10,6 @@ const gameToHTML = (user) => {
     </div>
     </div>`
 }
-/*
-const gameToHTML = (user) => {
-    return `
-    <div class="col-sm">
-        <input id="game" type="image"src=${user.img} width="250px" height="150px">
-        <a href="stats.html"  onclick="getSingleGameStats('${user.nombre}')"><p id="gameName">${user.nombre}</p></a>
-    </div>`
-}*/
 
 const gameListToHTML = (list, id) => {
     //console.log("id: " + id);
@@ -130,7 +71,7 @@ function createGame() {
             btn.disabled = true;   
         }
     });
-    
+    console.log("token: " + TOKEN);
 
 }
 
@@ -145,10 +86,10 @@ function deleteGame(ele){
         sendHTTPRequest(url, {}, HTTTPMethods.delete, (datos)=>{
             console.log("datos: "+datos.data);
             getGames();
-            alert('usuario eliminado');
+            alert('juego eliminado');
         }, (error)=>{
             alert(error);
-        })
+        }, TOKEN)
     });
 }
 
@@ -201,22 +142,6 @@ function updateGame(ele){
     });
 }
 
-/*
-function getGame(){
-    let urlParams = new URLSearchParams(window.location.search);
-    let name = urlParams.get("nombre");
-    console.log("name: " + name);
-    let url = APIURL + `/games/` + name;
-    sendHTTPRequest(url, {}, HTTTPMethods.get, (datos)=>{
-        //document.getElementById("lista").innerHTML = userListToHTML(datos, "lista");
-        console.log("datos dentro: " + JSON.stringify(datos.data));
-        gameToHTML(JSON.parse(datos.data));
-    },(err)=>{
-        alert(err);
-    })
-}
-*/
-
 function getGames() {
     let urlParams = new URLSearchParams(window.location.search);
     let name = urlParams.get("nombre");
@@ -238,9 +163,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    /*let btn = document.getElementById("regGame");
-    btn.addEventListener("click",function(e){
-        createGame();
-    })
-*/
 });

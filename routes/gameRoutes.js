@@ -25,43 +25,7 @@ router.post('/games', (req, res) =>{
         res.status(400).send('missing arguments');
     }
 })
- /*
-router.get('/games/', async (req, res) => {
-    /*try{
-        let list = await gameCtrl.getList();
-        console.log("list: " + JSON.stringify(list));
-        res.status(200).send(JSON.parse(list));
-    }catch(error){
-        res.status(400).send(error);
-    }
-    let list = await gameCtrl.getList();
-    if(list){
-        //console.log("List: " + JSON.stringify(list));
-        //newL = JSON.stringify(list);
-        res.status(200).send(list);
-    }        
-    else
-        res.status(400).send(error);
-})
-*/
-router.get('/games/:nombre', (req, res) =>{
-    if(req.params.nombre){
-        // users = users.find(ele=> ele.email === req.params.email);
-        gameCtrl.getGameByName(req.params.nombre,(games)=>{
-            if(games){
-                res.send(games);
-            }else{
-                res.set('Content-Type','application/json');
-                res.status(204).send({});
-            }
-        });
-    }else{
-        res.status(400).send('missing params');
-    }
-    
-})
 
-// put/api/games/:email
 router.put('/games/:nombre',(req,res)=>{
     let b = req.params.nombre;
     console.log("b: "+b);
@@ -84,11 +48,9 @@ router.put('/games/:nombre',(req,res)=>{
         res.status(400).send('missing arguments');
     }
 });
-/*
-"_id": "6293fa845442a6b3de6234d424590b45",
-  "_rev": "1-383c3cc35c5f3bbe28647197220d4247",
-*/
+
 router.delete('/games/:nombre', (req, res) =>{
+    console.log("nombre dentro del delete: " + req.params.nombre);
     if(req.params.nombre){
         gameCtrl.getGameByName(req.params.nombre, (g) => {
             if(g){
