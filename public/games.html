@@ -219,6 +219,44 @@
       </div>
     </div>
   </div>
+  <!-- Modal Update-->
+  <div class="modal fade" id="updateFormModal" tabindex="-1" role="dialog" aria-labelledby="updateFormModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateFormModal">Editar Juego</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+            <form action="" id="updateid">
+                <div class="row">
+                  <div class="col-6">
+                    <input type="text" name="nombre" id="name1" class="form-control" placeholder="Nombre"
+                      aria-describedby="helpId" required>
+                  </div>
+                  <div class="col-6">
+                    <input type="text" name="apellidos" id="tipo1" class="form-control" placeholder="Tipo" aria-describedby="helpId"
+                      required>
+                  </div>
+                </div>
+                <input type="text" class="form-control mt-3" placeholder="YYYY-MM-DD" name="fecha" id="fecha1">
+
+                <input type="url" name="image" id="img1" class="form-control mt-3" placeholder="Url de imagen de perfil"
+                  aria-describedby="helpId">
+
+
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" id="updatebtn">Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

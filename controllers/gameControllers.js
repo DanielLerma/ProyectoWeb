@@ -56,6 +56,39 @@ class GameController {
         return dtry;
         
     }
+    updateGame(user,cbOk){
+        //console.log('update user...')
+        let updatee = {
+            nombre: user.nombre,
+            tipo: user.tipo,
+            fecha: user.fecha,
+            img: user.img,
+            _id: user.uid,
+            _rev: user.rev
+        }
+        console.log("updatewww:"+updatee.nombre);
+        console.log("updatenombre:"+user.nombre);
+        this.getGameByName(user.nombre,(foundUser)=>{
+            if(foundUser){
+                cbOk();
+            }else{
+                GAMES_DB_CLOUDANT.insert(updatee).then((addedEntry)=>{
+                    console.log(addedEntry);
+                    if(addedEntry.ok){
+                        user.rev= addedEntry.rev;
+                        user.uid = addedEntry.id;
+                        console.log("nuevoyuser;"+JSON.stringify(user));
+                        cbOk(user);
+                    }else{
+                        cbOk();
+                    }
+                }).catch((error)=>{
+                    cbOk(null,error);
+                });
+
+            }
+        })
+    }
     getGameByName(nombre, cbOk){
         const q = {
             selector: {

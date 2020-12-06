@@ -62,35 +62,28 @@ router.get('/games/:nombre', (req, res) =>{
 })
 
 // put/api/games/:email
-router.put('/games/:email', (req, res) =>{
-    let mail = req.path.split("/").pop();
-    let user = gameCtrl.getUserByEmail(mail);
-    const oldU = user;
-    console.log("user: " + JSON.stringify(user));
-    const reqs = req.query;
-    console.log("reqs: " + JSON.stringify(reqs));
-    if(!user){
-        res.status(404).send("Usuario no encontrado");
+router.put('/games/:nombre',(req,res)=>{
+    let b = req.params.nombre;
+    console.log("b: "+b);
+    let body=req.body;
+    console.log("body: "+JSON.stringify(body));
+    if (b && (body.nombre || body.tipo || body.fecha  || body.img)) {
+        gameCtrl.getGameByName(b, (u)=>{
+            if (u) {
+                console.log(JSON.stringify(u));
+                Object.assign(u,body);
+                gameCtrl.updateGame(u,(updatee)=>{
+                    console.log("update:"+JSON.stringify(updatee));
+                    res.status(200).send(updatee);
+                });
+            } else {
+                res.status(404).send('user does not exist');
+            }
+        });
+    } else {
+        res.status(400).send('missing arguments');
     }
-    else{
-        const oldUID = oldU.uid;
-        user = reqs;
-        console.log("uid: " + user.uid);
-        user.email = oldU.email;
-        user.fecha = oldU.fecha;
-        user.sexo = oldU.sexo;
-        user.password = oldU.password;   
-        gameCtrl.deleteUser(oldU);
-        gameCtrl.insertUser(user);
-        user.uid = oldU.uid;
-        console.log("update: " + JSON.stringify(user));
-        const games = gameCtrl.getList();
-        let file = fs.readFileSync('./data/games.json');
-        console.log("file: " + file);
-        fs.writeFileSync('./data/games.json', JSON.stringify(games, null, 2));
-        res.status(200).send(user);
-    }
-})
+});
 /*
 "_id": "6293fa845442a6b3de6234d424590b45",
   "_rev": "1-383c3cc35c5f3bbe28647197220d4247",

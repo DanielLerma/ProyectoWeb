@@ -51,11 +51,14 @@ function getSingleGameStats(){
 
 const gameToHTML = (user) => {
     return `
+    <div class="row">
     <div class="col-sm">
-        <a href="stats.html?stats=${user.nombre}"><input id="game" type="image"src=${user.img} width="250px" height="150px" onclick="help('${user.nombre}')"></a>
+        <a href="stats.html?stats=${user.nombre}"><input id="game" type="image"src=${user.img} width="220px" height="140px" onclick="help('${user.nombre}')"></a>
         <div class="btn btn-primary" data-toggle="modal" data-target="#deleteFormModal"  data-name="${user.nombre}"><i class="fas fa-trash-alt remove "></i></div>
-        <div class="btn btn-primary"  > <a class="text-white" href="detgames.html?nombre=${user.nombre}"><i class="fas fa-search"></i></a></div>
+        <div class="btn btn-primary"data-user='${JSON.stringify(user)}' data-toggle="modal" data-target="#updateFormModal" onclick="updateGame('${user.nombre}')"><i class="fas fa-pencil-alt edit"></i></div>
+        <div class="btn btn-primary"> <a class="text-white" href="detgames.html?nombre=${user.nombre}"><i class="fas fa-search"></i></a></div>
         <p id="gameName">${user.nombre}</p>
+    </div>
     </div>`
 }
 /*
@@ -146,6 +149,55 @@ function deleteGame(ele){
         }, (error)=>{
             alert(error);
         })
+    });
+}
+
+function updateGame(ele){
+    let url = APIURL+'/games/'+ele;
+    console.log(url);
+    let btn = document.getElementById("updatebtn");
+    btn.disabled = true;
+    let form=document.getElementById("updateid");
+    form.addEventListener("change", function (e) {
+        let name = document.getElementById("name1").value;
+        console.log("name: " + name);
+        let tipo = document.getElementById("tipo1").value;
+        console.log("aps: " + tipo);
+        let fecha = document.getElementById("fecha1").value;
+        let imgg = document.getElementById("img1").value;
+        console.log("pwd1: " + fecha);
+        let temp = 0;
+        if(name != '')
+            temp++;
+        if(tipo != '')
+            temp++;
+        if(fecha != '')
+            temp++;
+        if(imgg != '')
+            temp++;
+        console.log("temp: " +temp);
+
+        if(temp == 4){
+            console.log(url);
+            btn.disabled = false;
+            console.log("antes");
+            btn.addEventListener("click", (event) =>{
+                console.log("fin")
+                event.preventDefault();
+                sendHTTPRequest(url, {nombre: name, tipo: tipo, fecha: fecha, img: imgg}, HTTTPMethods.put, (datos) => {
+                    console.log(datos);
+                    window.location.href = "games.html";
+                }, (error) =>{
+                    console.log("error");
+                    alert(error);
+                }, TOKEN)
+            }) 
+
+        }
+        else{
+            console.log("f3");
+            btn.disabled = true;
+        }
     });
 }
 
