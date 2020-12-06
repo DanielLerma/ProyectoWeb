@@ -28,6 +28,7 @@ const SECRET_JWT = process.env.SECRET_JWT || 'h@la123Cr@yola';
 
 async function authentication(req,res,next){
     let xauth = req.get('x-auth-user');
+    console.log(xauth);
     if(xauth){
         let id = xauth.split("-").pop();
         let user = userCtrl.getUser(parseInt(id));
@@ -85,13 +86,6 @@ app.post('/api/users', (req, res) => {
 });
 
 app.get('/api/games/', async (req, res) => {
-    /*try{
-        let list = await gameCtrl.getList();
-        console.log("list: " + JSON.stringify(list));
-        res.status(200).send(JSON.parse(list));
-    }catch(error){
-        res.status(400).send(error);
-    }*/
     let list = await gameCtrl.getList();
     if(list){
         //console.log("List: " + JSON.stringify(list));

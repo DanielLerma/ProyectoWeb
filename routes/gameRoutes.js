@@ -25,8 +25,7 @@ router.post('/games', (req, res) =>{
         res.status(400).send('missing arguments');
     }
 })
-
-// FALTA 
+ /*
 router.get('/games/', async (req, res) => {
     /*try{
         let list = await gameCtrl.getList();
@@ -34,7 +33,7 @@ router.get('/games/', async (req, res) => {
         res.status(200).send(JSON.parse(list));
     }catch(error){
         res.status(400).send(error);
-    }*/
+    }
     let list = await gameCtrl.getList();
     if(list){
         //console.log("List: " + JSON.stringify(list));
@@ -44,7 +43,7 @@ router.get('/games/', async (req, res) => {
     else
         res.status(400).send(error);
 })
-
+*/
 router.get('/games/:nombre', (req, res) =>{
     if(req.params.nombre){
         // users = users.find(ele=> ele.email === req.params.email);

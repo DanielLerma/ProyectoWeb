@@ -4,7 +4,7 @@ const CloudantSDK = require('@cloudant/cloudant');
 const CLOUDANT_CREDS = require('../localdev-config.json');
 const cloudant = new CloudantSDK(CLOUDANT_CREDS.url);
 const USERS_CLOUDANT_DB = cloudant.db.use('users');
-let CURRENT_ID = 0;
+let CURRENT_ID = 10000;
 
 
 /*let uids = USERS_DB.map((obj)=>{return obj.uid});
@@ -23,6 +23,7 @@ class UsersController {
         USERS_CLOUDANT_DB.insert(user).then((addedEntry)=>{
             //console.log(addedEntry);
             if(addedEntry.ok){
+                //user.id = generateId()
                 user.rev= addedEntry.rev;
                 user.uid = addedEntry.id;
                 cbOk(user);
@@ -146,7 +147,13 @@ class UsersController {
     async getUser(id){
         // let user = USERS_DB.find(ele=>ele.uid ===id);
         // return user;
-        let user = await USERS_CLOUDANT_DB.get(id);
+        const q = {
+            selector:{
+                _id:{"$eq":id}
+            }
+        }
+        let user = await USERS_CLOUDANT_DB.find(q);
+        console.log("user: " + user);
         return user.docs[0];
     }
     async getUserByEmail(email,cbOk){

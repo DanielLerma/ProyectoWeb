@@ -87,7 +87,7 @@ function bajar(){
     getStats(game);
 pagina-=3;
 }
-
+/*
 function searchStat(list){
     let btn = document.getElementById("searchBtn");
     console.log(pagina);
@@ -106,7 +106,41 @@ function searchStat(list){
     }
     statListToHTML(newList, "listaStat");
 }
+*/
 
+function searchStat(list){
+    let btn = document.getElementById("searchBtn");
+    console.log(pagina);
+    let game='';
+    //console.log("search"+document.getElementById("gameSearched").value);
+    if(document.getElementById("gameSearched"))
+        game = document.getElementById("gameSearched").value;
+    console.log("game: " + game);
+    console.log("list: " + JSON.stringify(list));
+    let newList = [];
+    //let pnewListf=[];
+    let newListf = [];
+   //if (pagina<=0) document.getElementById("pre").disabled = true;
+
+
+   for(let i=0; i < list.length;i++){
+
+    if(list[i].game.includes(game.toUpperCase())){
+        newList.push(list[i]);
+          }
+}
+        console.log("listasd: " + JSON.stringify(newList));
+        //pnewListf=JSON.parse(newList.data)
+
+    for(let i=pagina; i < pagina+3;i++){
+        if(i<newList.length){
+            //onsole.log("listasd: " + JSON.stringify(newList[i]));
+            newListf.push(newList[i]);
+    }
+}
+    console.log("list: " + JSON.stringify(newListf));
+        statListToHTML(newListf, "listaStat");
+}
 
 function setStat(){
     console.log("create");

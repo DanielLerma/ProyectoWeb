@@ -93,7 +93,7 @@ function login() {
                 //b.nombre && b.apellidos && b.email && b.sexo && b.fecha
                 sendHTTPRequest(url, {email:email, password:password}, HTTTPMethods.post, (datos) => {
                     console.log("entroooooooooooo");
-                    //setCookie('token', JSON.parse(datos.data).token, 2);
+                    setCookie('x-auth-user', JSON.parse(datos.data).token, 2);
                     document.getElementById('loginResponseMSG').innerHTML='<div class="text-success">Bienvenido</div>';
                     console.log("finalizo");
                     window.location.href = `stats.html?stats=${email}`;

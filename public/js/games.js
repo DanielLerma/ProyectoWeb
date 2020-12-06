@@ -53,7 +53,8 @@ const gameToHTML = (user) => {
     return `
     <div class="col-sm">
         <a href="stats.html?stats=${user.nombre}"><input id="game" type="image"src=${user.img} width="250px" height="150px" onclick="help('${user.nombre}')"></a>
-        <div class="btn btn-primary mt-2" data-toggle="modal" data-target="#deleteFormModal"  data-name="${user.nombre}"><i class="fas fa-trash-alt remove "></i></div>
+        <div class="btn btn-primary" data-toggle="modal" data-target="#deleteFormModal"  data-name="${user.nombre}"><i class="fas fa-trash-alt remove "></i></div>
+        <div class="btn btn-primary"  > <a class="text-white" href="detgames.html?nombre=${user.nombre}"><i class="fas fa-search"></i></a></div>
         <p id="gameName">${user.nombre}</p>
     </div>`
 }
