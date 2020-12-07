@@ -24,18 +24,7 @@ router.post('/', (req, res) => {
         res.status(400).send('missing arguments');
     }
 });
-/*
-router.get('/', async (req, res) => {
-    let list = await statsCtrl.getList();
-    if(list){
-        //console.log("List: " + JSON.stringify(list));
-        //newL = JSON.stringify(list);
-        res.status(200).send(list);
-    }        
-    else
-        res.status(400).send(error);
-})
-*/
+
 router.get('/:game',(req,res)=>{
     // let userCtrl = new UsersController();
     // let users = userCtrl.getList();
