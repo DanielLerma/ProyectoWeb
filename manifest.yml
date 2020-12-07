@@ -5,7 +5,7 @@ applications:
   buildpack: sdk-for-nodejs
   command: node server.js
   disk_quota: 1G
-  memory: 128MB
+  memory: 256MB
   domain: mybluemix.net
   host: ljf-proyectoweb
   env:
